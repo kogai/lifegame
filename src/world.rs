@@ -25,16 +25,41 @@ impl Cell {
             .to_owned()
     }
 
+    fn is_alive(&self) -> bool {
+        use self::Cell::*;
+        match self {
+            &Alive(_) => true,
+            &Death(_) => false,
+        }
+    }
+
     fn should_live(&self, grid: &Matrix<Cell>) -> bool {
         use self::Cell::*;
         match self {
-            &Alive((x, y)) |
-            &Death((x, y)) => {
-                // let xx = &grid[1];
-                true
-            },
-        };
-        unimplemented!();
+            &Alive((x, y)) | &Death((x, y)) => {
+                let arround = vec![(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1),
+                                   (1, 1)];
+                let lifes = arround.iter()
+                    .map(|&(pos_x, pos_y)| {
+                        if let Some(row) = grid.iter().nth((y + pos_y) as usize) {
+                            if let Some(cell) = row.iter().nth((x + pos_x) as usize) {
+                                return cell.is_alive();
+                            }
+                        }
+                        false
+                    })
+                    .collect::<Vec<_>>();
+                
+                
+                let alives: Vec<bool> = lifes.into_iter().filter(|x| x.clone()).collect();
+
+                if self.is_alive() {
+                    alives.len() == 2 || alives.len() == 3
+                } else {
+                    alives.len() == 3
+                }
+            }
+        }
     }
 }
 
