@@ -19,8 +19,8 @@ impl Cell {
     fn show(&self) -> String {
         use self::Cell::*;
         match self {
-                &Alive(_) => "1",
-                &Death(_) => "0",
+                &Alive(_) => "x",
+                &Death(_) => " ",
             }
             .to_owned()
     }

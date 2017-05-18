@@ -5,7 +5,17 @@ use std::time::Duration;
 use world::World;
 
 fn main() {
-    let mut game = World::new(20, 20, vec![(4, 4), (4, 5), (5, 4), (5, 5), (6, 4), (6, 5)]);
+    let mut game = World::new(
+        10, 10,
+        vec![
+            (7, 1),
+            (5, 2), (7, 2), (8, 2),
+            (5, 3), (7, 3),
+            (5, 4),
+            (3, 5),
+            (1, 6), (3, 6),
+        ]
+    );
 
     println!("{}", game.show());
     println!("------");
@@ -14,6 +24,6 @@ fn main() {
         game.tick();
         println!("{}", game.show());
         println!("------");
-        sleep(Duration::from_secs(1));
+        sleep(Duration::from_millis(500));
     }
 }
