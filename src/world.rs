@@ -49,8 +49,8 @@ impl Cell {
                         false
                     })
                     .collect::<Vec<_>>();
-                
-                
+
+
                 let alives: Vec<bool> = lifes.into_iter().filter(|x| x.clone()).collect();
 
                 if self.is_alive() {
