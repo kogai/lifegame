@@ -1,3 +1,7 @@
+mod world;
+use world::World;
+
 fn main() {
-    println!("Hello, world!");
+    let game = World::new(10, 10);
+    println!("{}", game.show());
 }
